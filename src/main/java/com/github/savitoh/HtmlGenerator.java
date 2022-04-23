@@ -3,6 +3,7 @@ package com.github.savitoh;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class HtmlGenerator {
@@ -46,10 +47,12 @@ public class HtmlGenerator {
     private final Writer writer;
 
     public HtmlGenerator(Writer writer) {
+        Objects.requireNonNull(writer, "'writer' cannot be null.");
         this.writer = writer;
     }
 
     public void generate(List<Movie> movies) throws IOException {
+        Objects.requireNonNull(movies, "'movies' cannot be null.");
         final String movieCards = movies.stream()
                 .map(movie -> String.format(MOVIE_CARD_TEMPLATE,
                                 movie.title(),
