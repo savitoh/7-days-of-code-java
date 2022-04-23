@@ -35,47 +35,28 @@ public class ParserJsonMovies {
     }
 
     private String getTitle(final String jsonMovie) {
-        return this.extractFromMatcher(TITLE_PATTERN.matcher(jsonMovie)).orElseThrow(
-                () -> new IllegalArgumentException("""
-                        Does not possible extract 'Title'.
-                        Json passed: 
-                        """.stripIndent() + jsonMovie
-                )
-        );
+        return this.extractFromMatcher(TITLE_PATTERN.matcher(jsonMovie))
+                .orElseThrow(() -> new IllegalArgumentException("Does not possible extract 'title'. Json passed:\n" + jsonMovie));
     }
 
     private String getYear(final String jsonMovie) {
-        return this.extractFromMatcher(YEAR_PATTERN.matcher(jsonMovie)).orElseThrow(
-                () -> new IllegalArgumentException("""
-                        Does not possible extract 'Year'.
-                        Json passed: 
-                        """.stripIndent() + jsonMovie
-                )
-        );
+        return this.extractFromMatcher(YEAR_PATTERN.matcher(jsonMovie))
+                .orElseThrow(() -> new IllegalArgumentException("Does not possible extract 'year'. Json passed:\n" + jsonMovie));
     }
 
     private String getImage(final String jsonMovie) {
-        return this.extractFromMatcher(IMAGE_PATTERN.matcher(jsonMovie)).orElseThrow(
-                () -> new IllegalArgumentException("""
-                        Does not possible extract 'Image'.
-                        Json passed: 
-                        """.stripIndent() + jsonMovie
-                )
-        );
+        return this.extractFromMatcher(IMAGE_PATTERN.matcher(jsonMovie))
+                .orElseThrow(() -> new IllegalArgumentException("Does not possible extract 'image'. Json passed:\n"+ jsonMovie));
     }
 
     private String getImDbRating(final String jsonMovie) {
-        return this.extractFromMatcher(IMDB_RATING_PATTERN.matcher(jsonMovie)).orElseThrow(
-                () -> new IllegalArgumentException("""
-                        Does not possible extract 'Rating'.
-                        Json passed: 
-                        """.stripIndent() + jsonMovie
-                )
-        );
+        return this.extractFromMatcher(IMDB_RATING_PATTERN.matcher(jsonMovie))
+                .orElseThrow(() -> new IllegalArgumentException("Does not possible extract 'imDbRating'. Json passed:\n" + jsonMovie));
     }
 
     private List<String> extractItems() {
-        final var items = extractFromMatcher(ITEMS_PATTERN.matcher(this.jsonMovies)).orElseThrow(IllegalAccessError::new);
+        final var items = extractFromMatcher(ITEMS_PATTERN.matcher(this.jsonMovies))
+                .orElseThrow(() -> new IllegalArgumentException("Does not possible extract 'items'. Json passed:\n" + jsonMovies));
         return List.of(items.split(ITEMS_SPLIT_PATTERN));
     }
 
