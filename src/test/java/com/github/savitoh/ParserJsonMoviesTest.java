@@ -1,20 +1,22 @@
 package com.github.savitoh;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.params.provider.Arguments.arguments;
+
+import java.util.List;
+import java.util.stream.Stream;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import java.util.List;
-import java.util.stream.Stream;
-
-import static org.junit.jupiter.api.Assertions.*;
-import static org.junit.jupiter.params.provider.Arguments.arguments;
-
 class ParserJsonMoviesTest {
 
-    public static final String BASE_MESSAGE_ERROR = "Does not possible extract '%s'. Json passed:\n";
-    private static final String jsonMovie = """
+  public static final String BASE_MESSAGE_ERROR = "Does not possible extract '%s'. Json passed:\n";
+  private static final String jsonMovie =
+      """
             {
                 "items": [
                     {
@@ -30,8 +32,10 @@ class ParserJsonMoviesTest {
                     }
                 ],
                 "errorMessage": ""
-            }""".stripIndent();
-    private static final String jsonTwoMovies = """
+            }"""
+          .stripIndent();
+  private static final String jsonTwoMovies =
+      """
             {
                 "items": [
                     {
@@ -58,17 +62,21 @@ class ParserJsonMoviesTest {
                     }
                 ],
                 "errorMessage": ""
-            }""".stripIndent();
+            }"""
+          .stripIndent();
 
-    private static Stream<Arguments> jsonWithItemsCollectionsErrorMapMessageError() {
-        var jsonMovieMissingItemsProperty = """
+  private static Stream<Arguments> jsonWithItemsCollectionsErrorMapMessageError() {
+    var jsonMovieMissingItemsProperty =
+        """
                 {
                     "title": "The Shawshank Redemption",
                     "year": "1994",
                     "image": "https://m.media-amazon.com/images/M/MV5BMDFkYTc0MGEtZmNhMC00ZDIzLWFmNTEtODM1ZmRlYWMwMWFmXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_UX128_CR0,3,128,176_AL_.jpg",
                     "imDbRating": "9.2"
-                }""".stripIndent();
-        var jsonMovieWrongItemsProperty = """
+                }"""
+            .stripIndent();
+    var jsonMovieWrongItemsProperty =
+        """
                 {
                     "item": [
                         {
@@ -79,16 +87,17 @@ class ParserJsonMoviesTest {
                         }
                     ],
                     "errorMessage": ""
-                }""".stripIndent();
+                }"""
+            .stripIndent();
 
-        return Stream.of(
-                arguments(jsonMovieMissingItemsProperty, BASE_MESSAGE_ERROR.formatted("items")),
-                arguments(jsonMovieWrongItemsProperty, BASE_MESSAGE_ERROR.formatted("items"))
-        );
-    }
+    return Stream.of(
+        arguments(jsonMovieMissingItemsProperty, BASE_MESSAGE_ERROR.formatted("items")),
+        arguments(jsonMovieWrongItemsProperty, BASE_MESSAGE_ERROR.formatted("items")));
+  }
 
-    private static Stream<Arguments> jsonWithTitlePropertyErrorMapMessageError() {
-        var jsonMovieMissingTitleProperty = """
+  private static Stream<Arguments> jsonWithTitlePropertyErrorMapMessageError() {
+    var jsonMovieMissingTitleProperty =
+        """
                 {
                     "items": [
                         {
@@ -98,8 +107,10 @@ class ParserJsonMoviesTest {
                         }
                     ],
                     "errorMessage": ""
-                }""".stripIndent();
-        var jsonMovieWrongTitleProperty = """
+                }"""
+            .stripIndent();
+    var jsonMovieWrongTitleProperty =
+        """
                 {
                     "items": [
                         {
@@ -110,16 +121,17 @@ class ParserJsonMoviesTest {
                         }
                     ],
                     "errorMessage": ""
-                }""".stripIndent();
+                }"""
+            .stripIndent();
 
-        return Stream.of(
-                arguments(jsonMovieMissingTitleProperty, BASE_MESSAGE_ERROR.formatted("title")),
-                arguments(jsonMovieWrongTitleProperty, BASE_MESSAGE_ERROR.formatted("title"))
-        );
-    }
+    return Stream.of(
+        arguments(jsonMovieMissingTitleProperty, BASE_MESSAGE_ERROR.formatted("title")),
+        arguments(jsonMovieWrongTitleProperty, BASE_MESSAGE_ERROR.formatted("title")));
+  }
 
-    private static Stream<Arguments> jsonWithImagePropertyErrorMapMessageError() {
-        var jsonMovieMissingImageProperty = """
+  private static Stream<Arguments> jsonWithImagePropertyErrorMapMessageError() {
+    var jsonMovieMissingImageProperty =
+        """
                 {
                     "items": [
                         {
@@ -129,8 +141,10 @@ class ParserJsonMoviesTest {
                         }
                     ],
                     "errorMessage": ""
-                }""".stripIndent();
-        var jsonMovieWrongImageProperty = """
+                }"""
+            .stripIndent();
+    var jsonMovieWrongImageProperty =
+        """
                 {
                     "items": [
                         {
@@ -141,16 +155,17 @@ class ParserJsonMoviesTest {
                         }
                     ],
                     "errorMessage": ""
-                }""".stripIndent();
+                }"""
+            .stripIndent();
 
-        return Stream.of(
-                arguments(jsonMovieMissingImageProperty, BASE_MESSAGE_ERROR.formatted("image")),
-                arguments(jsonMovieWrongImageProperty, BASE_MESSAGE_ERROR.formatted("image"))
-        );
-    }
+    return Stream.of(
+        arguments(jsonMovieMissingImageProperty, BASE_MESSAGE_ERROR.formatted("image")),
+        arguments(jsonMovieWrongImageProperty, BASE_MESSAGE_ERROR.formatted("image")));
+  }
 
-    private static Stream<Arguments> jsonWithRatingErrorMapMessageError() {
-        var jsonMovieMissingRatingProperty = """
+  private static Stream<Arguments> jsonWithRatingErrorMapMessageError() {
+    var jsonMovieMissingRatingProperty =
+        """
                 {
                     "items": [
                         {
@@ -160,8 +175,10 @@ class ParserJsonMoviesTest {
                         }
                     ],
                     "errorMessage": ""
-                }""".stripIndent();
-        var jsonMovieWrongRatingProperty = """
+                }"""
+            .stripIndent();
+    var jsonMovieWrongRatingProperty =
+        """
                 {
                     "items": [
                         {
@@ -172,72 +189,70 @@ class ParserJsonMoviesTest {
                         }
                     ],
                     "errorMessage": ""
-                }""".stripIndent();
+                }"""
+            .stripIndent();
 
-        return Stream.of(
-                arguments(jsonMovieMissingRatingProperty, BASE_MESSAGE_ERROR.formatted("imDbRating")),
-                arguments(jsonMovieWrongRatingProperty, BASE_MESSAGE_ERROR.formatted("imDbRating"))
-        );
-    }
+    return Stream.of(
+        arguments(jsonMovieMissingRatingProperty, BASE_MESSAGE_ERROR.formatted("imDbRating")),
+        arguments(jsonMovieWrongRatingProperty, BASE_MESSAGE_ERROR.formatted("imDbRating")));
+  }
 
-    private static Stream<Arguments> jsonMapMovies() {
-        return Stream.of(
-                arguments(jsonMovie, List.of(
-                                new Movie("The Shawshank Redemption",
-                                        "https://m.media-amazon.com/images/M/MV5BMDFkYTc0MGEtZmNhMC00ZDIzLWFmNTEtODM1ZmRlYWMwMWFmXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_UX128_CR0,3,128,176_AL_.jpg",
-                                        9.2,
-                                        1994)
-                        )
-                ),
-                arguments(jsonTwoMovies, List.of(
-                                new Movie("The Shawshank Redemption",
-                                        "https://m.media-amazon.com/images/M/MV5BMDFkYTc0MGEtZmNhMC00ZDIzLWFmNTEtODM1ZmRlYWMwMWFmXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_UX128_CR0,3,128,176_AL_.jpg",
-                                        9.2,
-                                        1994
-                                ),
-                                new Movie("The Godfather",
-                                        "https://m.media-amazon.com/images/M/MV5BM2MyNjYxNmUtYTAwNi00MTYxLWJmNWYtYzZlODY3ZTk3OTFlXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_UX128_CR0,1,128,176_AL_.jpg",
-                                        9.2,
-                                        1972
-                                )
-                        )
-                )
-        );
-    }
+  private static Stream<Arguments> jsonMapMovies() {
+    return Stream.of(
+        arguments(
+            jsonMovie,
+            List.of(
+                new Movie(
+                    "The Shawshank Redemption",
+                    "https://m.media-amazon.com/images/M/MV5BMDFkYTc0MGEtZmNhMC00ZDIzLWFmNTEtODM1ZmRlYWMwMWFmXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_UX128_CR0,3,128,176_AL_.jpg",
+                    9.2,
+                    1994))),
+        arguments(
+            jsonTwoMovies,
+            List.of(
+                new Movie(
+                    "The Shawshank Redemption",
+                    "https://m.media-amazon.com/images/M/MV5BMDFkYTc0MGEtZmNhMC00ZDIzLWFmNTEtODM1ZmRlYWMwMWFmXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_UX128_CR0,3,128,176_AL_.jpg",
+                    9.2,
+                    1994),
+                new Movie(
+                    "The Godfather",
+                    "https://m.media-amazon.com/images/M/MV5BM2MyNjYxNmUtYTAwNi00MTYxLWJmNWYtYzZlODY3ZTk3OTFlXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_UX128_CR0,1,128,176_AL_.jpg",
+                    9.2,
+                    1972))));
+  }
 
-    @Test
-    void Should_ThrowNPE_When_InitializeWithJsonNull() {
-        Exception exception = assertThrows(NullPointerException.class, () -> new ParserJsonMovies(null));
+  @Test
+  void Should_ThrowNPE_When_InitializeWithJsonNull() {
+    Exception exception =
+        assertThrows(NullPointerException.class, () -> new ParserJsonMovies(null));
 
-        assertEquals("'json' cannot be null.", exception.getMessage());
-    }
+    assertEquals("'json' cannot be null.", exception.getMessage());
+  }
 
-    @ParameterizedTest
-    @MethodSource(
-            {
-                    "jsonWithItemsCollectionsErrorMapMessageError",
-                    "jsonWithTitlePropertyErrorMapMessageError",
-                    "jsonWithImagePropertyErrorMapMessageError",
-                    "jsonWithRatingErrorMapMessageError"
-            }
-    )
-    void Should_IllegalArgumentException_When_JsonMovieDoesNotFollowExpectedStructure(String jsonMovie,
-                                                                                      String messageErrorExpected) {
-        final ParserJsonMovies parserJsonMovies = new ParserJsonMovies(jsonMovie);
+  @ParameterizedTest
+  @MethodSource({
+    "jsonWithItemsCollectionsErrorMapMessageError",
+    "jsonWithTitlePropertyErrorMapMessageError",
+    "jsonWithImagePropertyErrorMapMessageError",
+    "jsonWithRatingErrorMapMessageError"
+  })
+  void Should_IllegalArgumentException_When_JsonMovieDoesNotFollowExpectedStructure(
+      String jsonMovie, String messageErrorExpected) {
+    final ParserJsonMovies parserJsonMovies = new ParserJsonMovies(jsonMovie);
 
-        Exception exception = assertThrows(IllegalArgumentException.class, parserJsonMovies::parse);
+    Exception exception = assertThrows(IllegalArgumentException.class, parserJsonMovies::parse);
 
-        assertTrue(exception.getMessage().contains(messageErrorExpected));
-    }
+    assertTrue(exception.getMessage().contains(messageErrorExpected));
+  }
 
-    @ParameterizedTest
-    @MethodSource("jsonMapMovies")
-    void Should_ParseMovies_When_JsonMovieIsValid(String jsonMovie, List<Movie> moviesExpected) {
-        final ParserJsonMovies parserJsonMovies = new ParserJsonMovies(jsonMovie);
+  @ParameterizedTest
+  @MethodSource("jsonMapMovies")
+  void Should_ParseMovies_When_JsonMovieIsValid(String jsonMovie, List<Movie> moviesExpected) {
+    final ParserJsonMovies parserJsonMovies = new ParserJsonMovies(jsonMovie);
 
-        final List<Movie> movies = parserJsonMovies.parse();
+    final List<Movie> movies = parserJsonMovies.parse();
 
-        assertEquals(moviesExpected, movies);
-    }
-
+    assertEquals(moviesExpected, movies);
+  }
 }

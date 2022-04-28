@@ -1,66 +1,67 @@
 package com.github.savitoh;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.io.TempDir;
+import static java.util.List.of;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
-
-import static java.util.List.of;
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 class HtmlGeneratorTest {
 
-    @TempDir
-    private Path tempDir;
+  @TempDir private Path tempDir;
 
-    private Path tempMoviesHtml;
+  private Path tempMoviesHtml;
 
-    @BeforeEach
-    void setUp() {
-        this.tempMoviesHtml = tempDir.resolve("movies_test.html");
-    }
+  @BeforeEach
+  void setUp() {
+    this.tempMoviesHtml = tempDir.resolve("movies_test.html");
+  }
 
-    @Test
-    void Should_ThrowNPE_When_InitializeWithWriterNull() {
-        Exception exception = assertThrows(NullPointerException.class, () -> new HtmlGenerator(null));
+  @Test
+  void Should_ThrowNPE_When_InitializeWithWriterNull() {
+    Exception exception = assertThrows(NullPointerException.class, () -> new HtmlGenerator(null));
 
-        assertEquals("'writer' cannot be null.", exception.getMessage());
-    }
+    assertEquals("'writer' cannot be null.", exception.getMessage());
+  }
 
-    @Test
-    void Should_ThrowNPE_When_GenerateHtmlWithMoviesNull() throws IOException {
-        final var writer = new FileWriter(this.tempMoviesHtml.toFile());
-        final var htmlGenerator = new HtmlGenerator(writer);
+  @Test
+  void Should_ThrowNPE_When_GenerateHtmlWithMoviesNull() throws IOException {
+    final var writer = new FileWriter(this.tempMoviesHtml.toFile());
 
+    final var htmlGenerator = new HtmlGenerator(writer);
 
-        Exception exception = assertThrows(NullPointerException.class, () -> htmlGenerator.generate(null));
-        assertEquals("'movies' cannot be null.", exception.getMessage());
-    }
+    Exception exception =
+        assertThrows(NullPointerException.class, () -> htmlGenerator.generate(null));
+    assertEquals("'movies' cannot be null.", exception.getMessage());
+  }
 
-    @Test
-    void Should_GenerateHtmlWithMultiplesMovies_When_MoviesArgumentsHasMoreOneElement() throws IOException {
-        final var writer = new FileWriter(this.tempMoviesHtml.toFile());
-        final var htmlGenerator = new HtmlGenerator(writer);
-        final var movies = of(
-                new Movie("Harry Potter",
-                        "https://play-lh.googleusercontent.com/SF5BMT_IsoF7GBl4USjTr4CrNvXkFClA26qvzyKX6chRdGaXr6JDvnTVqO3wv2EF161VC2jD80YTedD-6HI=w200-h300-rw",
-                        9.0,
-                        2001
-                )
-        );
+  @Test
+  void Should_GenerateHtmlWithMultiplesMovies_When_MoviesArgumentsHasMoreOneElement()
+      throws IOException {
+    final var writer = new FileWriter(this.tempMoviesHtml.toFile());
+    final var htmlGenerator = new HtmlGenerator(writer);
+    final var movies =
+        of(
+            new Movie(
+                "Harry Potter",
+                "https://play-lh.googleusercontent.com/SF5BMT_IsoF7GBl4USjTr4CrNvXkFClA26qvzyKX6chRdGaXr6JDvnTVqO3wv2EF161VC2jD80YTedD-6HI=w200-h300-rw",
+                9.0,
+                2001));
 
+    htmlGenerator.generate(movies);
+    writer.close();
 
-        htmlGenerator.generate(movies);
-        writer.close();
-
-
-        final String htmlContent = Files.readString(tempMoviesHtml);
-        final String htmlContentExpected = """
+    final String htmlContent = Files.readString(tempMoviesHtml);
+    final String htmlContentExpected =
+        """
                 <!doctype html>
                     <html lang="en-us">
                                 <head>
@@ -70,7 +71,7 @@ class HtmlGeneratorTest {
                             <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
                             <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
                         </head>
-                                
+
                         <body>
                         <main>
                             <div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
@@ -83,23 +84,23 @@ class HtmlGeneratorTest {
                         </main>
                    </body>
                     </html>
-                """.stripIndent();
-        assertFalse(htmlContent.isBlank());
-        assertEquals(htmlContentExpected.strip(), htmlContent.strip());
-    }
+                """
+            .stripIndent();
+    assertFalse(htmlContent.isBlank());
+    assertEquals(htmlContentExpected.strip(), htmlContent.strip());
+  }
 
-    @Test
-    void Should_GenerateHtmlWithOutMovies_When_MoviesArgumentsHasEmpty() throws IOException {
-        final var writer = new FileWriter(this.tempMoviesHtml.toFile());
-        final var htmlGenerator = new HtmlGenerator(writer);
+  @Test
+  void Should_GenerateHtmlWithOutMovies_When_MoviesArgumentsHasEmpty() throws IOException {
+    final var writer = new FileWriter(this.tempMoviesHtml.toFile());
+    final var htmlGenerator = new HtmlGenerator(writer);
 
+    htmlGenerator.generate(List.of());
+    writer.close();
 
-        htmlGenerator.generate(List.of());
-        writer.close();
-
-
-        final String htmlContent = Files.readString(tempMoviesHtml);
-        final String htmlContentExpected = """
+    final String htmlContent = Files.readString(tempMoviesHtml);
+    final String htmlContentExpected =
+        """
                 <!doctype html>
                     <html lang="en-us">
                                 <head>
@@ -116,8 +117,7 @@ class HtmlGeneratorTest {
                         </main>
                    </body>
                     </html>""";
-        assertFalse(htmlContent.isBlank());
-        assertEquals(htmlContentExpected.strip(), htmlContent.strip());
-    }
-
+    assertFalse(htmlContent.isBlank());
+    assertEquals(htmlContentExpected.strip(), htmlContent.strip());
+  }
 }
