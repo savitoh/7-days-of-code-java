@@ -2,23 +2,20 @@ package com.github.savitoh;
 
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.Writer;
 import java.util.List;
 
 public class Main {
 
-    public static void main(String[] args) throws IOException, InterruptedException {
-        final String uri = "https://imdb-api.com/en/API/Top250Movies/";
-        final String apiKey = System.getenv("IMDB_API_KEY");
-        final ImdbApiClient imdbApiClient = new ImdbApiClient(uri, apiKey);
+  public static void main(String[] args) throws IOException, InterruptedException {
+    final String uri = "https://imdb-api.com/en/API/Top250Movies/";
+    final String apiKey = System.getenv("IMDB_API_KEY");
+    final ImdbApiClient imdbApiClient = new ImdbApiClient(uri, apiKey);
 
-
-        final String top250MoviesJson = imdbApiClient.getTop250Movies();
-        final List<Movie> movies = new ParserJsonMovies(top250MoviesJson).parse();
-        try (final var writer = new FileWriter("movies.html")) {
-            HtmlGenerator htmlGenerator = new HtmlGenerator(writer);
-            htmlGenerator.generate(movies);
-        }
+    final String top250MoviesJson = imdbApiClient.getTop250Movies();
+    final List<Movie> movies = new ParserJsonMovies(top250MoviesJson).parse();
+    try (final var writer = new FileWriter("movies.html")) {
+      HtmlGenerator htmlGenerator = new HtmlGenerator(writer);
+      htmlGenerator.generate(movies);
     }
+  }
 }
