@@ -28,7 +28,7 @@ public class ImdbApiClient {
   }
 
   public String getTop250Movies() throws IOException, InterruptedException {
-    HttpResponse<String> response =
+      HttpResponse<String> response =
         this.httpClient.send(this.httpRequest, HttpResponse.BodyHandlers.ofString());
     return response.body();
   }
