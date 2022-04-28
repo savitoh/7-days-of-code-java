@@ -91,8 +91,8 @@ class ParserJsonMoviesTest {
             .stripIndent();
 
     return Stream.of(
-        arguments(jsonMovieMissingItemsProperty, BASE_MESSAGE_ERROR.formatted("items")),
-        arguments(jsonMovieWrongItemsProperty, BASE_MESSAGE_ERROR.formatted("items")));
+        arguments(jsonMovieMissingItemsProperty, BASE_MESSAGE_ERROR.formatted("movies")),
+        arguments(jsonMovieWrongItemsProperty, BASE_MESSAGE_ERROR.formatted("movies")));
   }
 
   private static Stream<Arguments> jsonWithTitlePropertyErrorMapMessageError() {

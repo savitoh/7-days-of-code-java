@@ -59,23 +59,21 @@ public class HtmlGenerator {
     this.writer = writer;
   }
 
+  public String generateMovieCards(List<Movie> movies) {
+    return movies.stream()
+        .map(
+            movie ->
+                MOVIE_CARD_TEMPLATE.formatted(
+                    movie.title(), movie.urlImage(), movie.title(), movie.rating(), movie.year()))
+        .collect(Collectors.joining("\n"))
+        .strip();
+  }
+
   public void generate(List<Movie> movies) throws IOException {
     Objects.requireNonNull(movies, "'movies' cannot be null.");
-    final String movieCards =
-        movies.stream()
-            .map(
-                movie ->
-                    String.format(
-                        MOVIE_CARD_TEMPLATE,
-                        movie.title(),
-                        movie.urlImage(),
-                        movie.title(),
-                        movie.rating(),
-                        movie.year()))
-            .collect(Collectors.joining("\n"))
-            .strip();
-    final String body = String.format(BODY_TEMPLATE, movieCards).strip();
-    final String html = String.format(HTML_TEMPLATE, HEAD, body).strip();
+    final var movieCards = generateMovieCards(movies);
+    final var body = BODY_TEMPLATE.formatted(movieCards).strip();
+    final var html = HTML_TEMPLATE.formatted(HEAD, body).strip();
     writer.write(html);
   }
 }
