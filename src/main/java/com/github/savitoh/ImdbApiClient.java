@@ -14,20 +14,19 @@ public class ImdbApiClient {
   private final HttpClient httpClient;
 
   public ImdbApiClient(final String uri, final String apiKey) {
-    this.httpRequest = HttpRequest.newBuilder()
-        .uri(URI.create(uri + apiKey))
-        .timeout(Duration.ofMinutes(1))
-        .header("Accept", "application/json")
-        .GET()
-        .build();
-    this.httpClient = HttpClient.newBuilder()
-        .connectTimeout(Duration.ofMinutes(1))
-        .build();
+    this.httpRequest =
+        HttpRequest.newBuilder()
+            .uri(URI.create(uri + apiKey))
+            .timeout(Duration.ofMinutes(1))
+            .header("Accept", "application/json")
+            .GET()
+            .build();
+    this.httpClient = HttpClient.newBuilder().connectTimeout(Duration.ofMinutes(1)).build();
   }
 
   public String getTop250Movies() throws IOException, InterruptedException {
-    HttpResponse<String> response = this.httpClient.send(this.httpRequest,
-        HttpResponse.BodyHandlers.ofString());
+    HttpResponse<String> response =
+        this.httpClient.send(this.httpRequest, HttpResponse.BodyHandlers.ofString());
     return response.body();
   }
 }
