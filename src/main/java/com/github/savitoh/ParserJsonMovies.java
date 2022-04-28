@@ -38,12 +38,7 @@ public class ParserJsonMovies {
         .orElseThrow(
             () ->
                 new IllegalArgumentException(
-                    """
-                        Does not possible extract 'Title'.
-                        Json passed:
-                        """
-                            .stripIndent()
-                        + jsonMovie));
+                    "Does not possible extract 'title'. Json passed:\n" + jsonMovie));
   }
 
   private String getYear(final String jsonMovie) {
@@ -51,12 +46,7 @@ public class ParserJsonMovies {
         .orElseThrow(
             () ->
                 new IllegalArgumentException(
-                    """
-                        Does not possible extract 'Year'.
-                        Json passed:
-                        """
-                            .stripIndent()
-                        + jsonMovie));
+                    "Does not possible extract 'year'. Json passed:\n" + jsonMovie));
   }
 
   private String getImage(final String jsonMovie) {
@@ -64,12 +54,7 @@ public class ParserJsonMovies {
         .orElseThrow(
             () ->
                 new IllegalArgumentException(
-                    """
-                        Does not possible extract 'Image'.
-                        Json passed:
-                        """
-                            .stripIndent()
-                        + jsonMovie));
+                    "Does not possible extract 'image'. Json passed:\n" + jsonMovie));
   }
 
   private String getImDbRating(final String jsonMovie) {
@@ -77,18 +62,16 @@ public class ParserJsonMovies {
         .orElseThrow(
             () ->
                 new IllegalArgumentException(
-                    """
-                        Does not possible extract 'Rating'.
-                        Json passed:
-                        """
-                            .stripIndent()
-                        + jsonMovie));
+                    "Does not possible extract 'imDbRating'. Json passed:\n" + jsonMovie));
   }
 
   private List<String> extractItems() {
     final var items =
         extractFromMatcher(ITEMS_PATTERN.matcher(this.jsonMovies))
-            .orElseThrow(IllegalAccessError::new);
+            .orElseThrow(
+                () ->
+                    new IllegalArgumentException(
+                        "Does not possible extract 'items'. Json passed:\n" + jsonMovies));
     return List.of(items.split(ITEMS_SPLIT_PATTERN));
   }
 
