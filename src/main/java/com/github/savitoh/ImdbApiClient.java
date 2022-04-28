@@ -6,6 +6,7 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.time.Duration;
+import java.util.Objects;
 
 public class ImdbApiClient {
 
@@ -14,6 +15,8 @@ public class ImdbApiClient {
   private final HttpClient httpClient;
 
   public ImdbApiClient(final String uri, final String apiKey) {
+    Objects.requireNonNull(uri, "'uri' cannot be null.");
+    Objects.requireNonNull(apiKey, "'apiKey' cannot be null.");
     this.httpRequest =
         HttpRequest.newBuilder()
             .uri(URI.create(uri + apiKey))
