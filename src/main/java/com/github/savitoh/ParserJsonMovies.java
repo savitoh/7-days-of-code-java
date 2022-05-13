@@ -20,7 +20,6 @@ public class ParserJsonMovies {
 
   private final String jsonMovies;
 
-  /** TODO valid json format */
   public ParserJsonMovies(final String json) {
     Objects.requireNonNull(json, "'json' cannot be null.");
     this.jsonMovies = json;
