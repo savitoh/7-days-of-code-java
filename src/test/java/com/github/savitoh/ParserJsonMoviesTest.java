@@ -205,21 +205,21 @@ class ParserJsonMoviesTest {
                 new Movie(
                     "The Shawshank Redemption",
                     "https://m.media-amazon.com/images/M/MV5BMDFkYTc0MGEtZmNhMC00ZDIzLWFmNTEtODM1ZmRlYWMwMWFmXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_UX128_CR0,3,128,176_AL_.jpg",
-                    9.2,
-                    1994))),
+                    "9.2",
+                    "1994"))),
         arguments(
             jsonTwoMovies,
             List.of(
                 new Movie(
                     "The Shawshank Redemption",
                     "https://m.media-amazon.com/images/M/MV5BMDFkYTc0MGEtZmNhMC00ZDIzLWFmNTEtODM1ZmRlYWMwMWFmXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_UX128_CR0,3,128,176_AL_.jpg",
-                    9.2,
-                    1994),
+                    "9.2",
+                    "1994"),
                 new Movie(
                     "The Godfather",
                     "https://m.media-amazon.com/images/M/MV5BM2MyNjYxNmUtYTAwNi00MTYxLWJmNWYtYzZlODY3ZTk3OTFlXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_UX128_CR0,1,128,176_AL_.jpg",
-                    9.2,
-                    1972))));
+                    "9.2",
+                    "1972"))));
   }
 
   @Test
