@@ -6,7 +6,7 @@ import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class ParserJsonMovies {
+public class ParserJsonMovies implements JsonParser {
 
   private static final String MOVIE_SPLIT_PATTERN = "(?<=\\}),\\s*(?=\\{)";
   private static final Pattern MOVIE_PATTERN =
@@ -74,16 +74,11 @@ public class ParserJsonMovies {
     return List.of(movies.split(MOVIE_SPLIT_PATTERN));
   }
 
+  @Override
   public List<Movie> parse() {
     final var movies = extractMovies();
     return movies.stream()
-        .map(
-            item ->
-                new Movie(
-                    getTitle(item),
-                    getImage(item),
-                    Double.parseDouble(getImDbRating(item)),
-                    Integer.parseInt(getYear(item))))
+        .map(item -> new Movie(getTitle(item), getImage(item), getImDbRating(item), getYear(item)))
         .toList();
   }
 }

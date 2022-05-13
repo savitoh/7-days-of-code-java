@@ -53,8 +53,8 @@ class HtmlGeneratorTest {
             new Movie(
                 "Harry Potter",
                 "https://play-lh.googleusercontent.com/SF5BMT_IsoF7GBl4USjTr4CrNvXkFClA26qvzyKX6chRdGaXr6JDvnTVqO3wv2EF161VC2jD80YTedD-6HI=w200-h300-rw",
-                9.0,
-                2001));
+                "9.0",
+                "2001"));
 
     htmlGenerator.generate(movies);
     writer.close();
