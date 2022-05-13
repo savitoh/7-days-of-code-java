@@ -11,7 +11,7 @@ public class Main {
     final String apiKey = System.getenv("IMDB_API_KEY");
     final ImdbApiClient imdbApiClient = new ImdbApiClient(uri, apiKey);
 
-    final String top250MoviesJson = imdbApiClient.getTop250Movies();
+    final String top250MoviesJson = imdbApiClient.getBody();
     final List<Movie> movies = new ParserJsonMovies(top250MoviesJson).parse();
     try (final var writer = new FileWriter("movies.html")) {
       HtmlGenerator htmlGenerator = new HtmlGenerator(writer);
