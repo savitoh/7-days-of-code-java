@@ -12,7 +12,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-class ParserJsonMoviesTest {
+class ImdbMoviesJsonParserTest {
 
   public static final String BASE_MESSAGE_ERROR = "Does not possible extract '%s'. Json passed:\n";
   private static final String jsonMovie =
@@ -225,7 +225,7 @@ class ParserJsonMoviesTest {
   @Test
   void Should_ThrowNPE_When_InitializeWithJsonNull() {
     Exception exception =
-        assertThrows(NullPointerException.class, () -> new ParserJsonMovies(null));
+        assertThrows(NullPointerException.class, () -> new ImdbMoviesJsonParser(null));
 
     assertEquals("'json' cannot be null.", exception.getMessage());
   }
@@ -239,9 +239,9 @@ class ParserJsonMoviesTest {
   })
   void Should_IllegalArgumentException_When_JsonMovieDoesNotFollowExpectedStructure(
       String jsonMovie, String messageErrorExpected) {
-    final ParserJsonMovies parserJsonMovies = new ParserJsonMovies(jsonMovie);
+    final ImdbMoviesJsonParser imdbMoviesJsonParser = new ImdbMoviesJsonParser(jsonMovie);
 
-    Exception exception = assertThrows(IllegalArgumentException.class, parserJsonMovies::parse);
+    Exception exception = assertThrows(IllegalArgumentException.class, imdbMoviesJsonParser::parse);
 
     assertTrue(exception.getMessage().contains(messageErrorExpected));
   }
@@ -249,9 +249,9 @@ class ParserJsonMoviesTest {
   @ParameterizedTest
   @MethodSource("jsonMapMovies")
   void Should_ParseMovies_When_JsonMovieIsValid(String jsonMovie, List<Movie> moviesExpected) {
-    final ParserJsonMovies parserJsonMovies = new ParserJsonMovies(jsonMovie);
+    final ImdbMoviesJsonParser imdbMoviesJsonParser = new ImdbMoviesJsonParser(jsonMovie);
 
-    final List<Movie> movies = parserJsonMovies.parse();
+    final List<Movie> movies = imdbMoviesJsonParser.parse();
 
     assertEquals(moviesExpected, movies);
   }

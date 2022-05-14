@@ -59,7 +59,7 @@ public class HtmlGenerator {
     this.writer = writer;
   }
 
-  public String generateMovieCards(List<Movie> movies) {
+  private String generateMovieCards(List<Movie> movies) {
     return movies.stream()
         .map(
             movie ->

@@ -6,7 +6,7 @@ import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class ParserJsonMovies implements JsonParser {
+public class ImdbMoviesJsonParser implements JsonParser {
 
   private static final String MOVIE_SPLIT_PATTERN = "(?<=\\}),\\s*(?=\\{)";
   private static final Pattern MOVIE_PATTERN =
@@ -20,7 +20,7 @@ public class ParserJsonMovies implements JsonParser {
 
   private final String jsonMovies;
 
-  public ParserJsonMovies(final String json) {
+  public ImdbMoviesJsonParser(final String json) {
     Objects.requireNonNull(json, "'json' cannot be null.");
     this.jsonMovies = json;
   }
