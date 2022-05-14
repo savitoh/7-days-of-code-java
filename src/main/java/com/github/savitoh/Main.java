@@ -1,6 +1,5 @@
 package com.github.savitoh;
 
-import com.github.savitoh.http.imdb.ImdbApiClient;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
