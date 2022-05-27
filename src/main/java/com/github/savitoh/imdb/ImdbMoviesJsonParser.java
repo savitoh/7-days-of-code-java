@@ -1,5 +1,6 @@
-package com.github.savitoh;
+package com.github.savitoh.imdb;
 
+import com.github.savitoh.JsonParser;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
