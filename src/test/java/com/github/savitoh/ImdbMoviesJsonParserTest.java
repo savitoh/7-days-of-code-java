@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
+import com.github.savitoh.imdb.ImdbMoviesJsonParser;
+import com.github.savitoh.imdb.Movie;
 import java.util.List;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.Test;

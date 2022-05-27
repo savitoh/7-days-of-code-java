@@ -1,5 +1,6 @@
 package com.github.savitoh;
 
+import com.github.savitoh.imdb.Movie;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.github.savitoh;
+package com.github.savitoh.imdb;
 
 import java.io.IOException;
 import java.net.URI;
