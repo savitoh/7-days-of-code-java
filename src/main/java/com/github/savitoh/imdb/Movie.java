@@ -7,5 +7,5 @@ public record Movie(
     String title,
     @JsonProperty("image") String urlImage,
     @JsonProperty("imDbRating") String rating,
-    String year
-) implements Content {}
+    String year)
+    implements Content {}

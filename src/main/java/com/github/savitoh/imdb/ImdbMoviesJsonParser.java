@@ -16,9 +16,10 @@ public class ImdbMoviesJsonParser implements JsonParser {
 
   private static final Pattern MOVIE_PATTERN =
       Pattern.compile("\"items\"\\s*:\\s*(\\[.*?\\]),", Pattern.DOTALL);
-  private final ObjectMapper mapper = new ObjectMapper()
-      .enable(SerializationFeature.INDENT_OUTPUT)
-      .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+  private final ObjectMapper mapper =
+      new ObjectMapper()
+          .enable(SerializationFeature.INDENT_OUTPUT)
+          .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
   private final String jsonMovies;
 
   public ImdbMoviesJsonParser(final String json) {
@@ -33,7 +34,6 @@ public class ImdbMoviesJsonParser implements JsonParser {
     return Optional.empty();
   }
 
-
   private String extractMovies() {
     return extractByMatcher(MOVIE_PATTERN.matcher(this.jsonMovies))
         .orElseThrow(
@@ -45,6 +45,6 @@ public class ImdbMoviesJsonParser implements JsonParser {
   @Override
   public List<Movie> parse() throws JsonProcessingException {
     final var movies = extractMovies();
-    return mapper.readValue(movies, new TypeReference<List<Movie>>() { });
+    return mapper.readValue(movies, new TypeReference<List<Movie>>() {});
   }
 }
