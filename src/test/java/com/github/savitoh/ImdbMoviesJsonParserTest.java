@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.github.savitoh.imdb.ImdbMoviesJsonParser;
 import com.github.savitoh.imdb.Movie;
 import java.util.List;
@@ -97,108 +98,6 @@ class ImdbMoviesJsonParserTest {
         arguments(jsonMovieWrongItemsProperty, BASE_MESSAGE_ERROR.formatted("movies")));
   }
 
-  private static Stream<Arguments> jsonWithTitlePropertyErrorMapMessageError() {
-    var jsonMovieMissingTitleProperty =
-        """
-                {
-                    "items": [
-                        {
-                            "year": "1994",
-                            "image": "https://m.media-amazon.com/images/M/MV5BMDFkYTc0MGEtZmNhMC00ZDIzLWFmNTEtODM1ZmRlYWMwMWFmXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_UX128_CR0,3,128,176_AL_.jpg",
-                            "imDbRating": "9.2"
-                        }
-                    ],
-                    "errorMessage": ""
-                }"""
-            .stripIndent();
-    var jsonMovieWrongTitleProperty =
-        """
-                {
-                    "items": [
-                        {
-                            "titl": "The Shawshank Redemption",
-                            "year": "1994",
-                            "image": "https://m.media-amazon.com/images/M/MV5BMDFkYTc0MGEtZmNhMC00ZDIzLWFmNTEtODM1ZmRlYWMwMWFmXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_UX128_CR0,3,128,176_AL_.jpg",
-                            "imDbRating": "9.2"
-                        }
-                    ],
-                    "errorMessage": ""
-                }"""
-            .stripIndent();
-
-    return Stream.of(
-        arguments(jsonMovieMissingTitleProperty, BASE_MESSAGE_ERROR.formatted("title")),
-        arguments(jsonMovieWrongTitleProperty, BASE_MESSAGE_ERROR.formatted("title")));
-  }
-
-  private static Stream<Arguments> jsonWithImagePropertyErrorMapMessageError() {
-    var jsonMovieMissingImageProperty =
-        """
-                {
-                    "items": [
-                        {
-                            "title": "The Shawshank Redemption",
-                            "year": "1994",
-                            "imDbRating": "9.2"
-                        }
-                    ],
-                    "errorMessage": ""
-                }"""
-            .stripIndent();
-    var jsonMovieWrongImageProperty =
-        """
-                {
-                    "items": [
-                        {
-                            "title": "The Shawshank Redemption",
-                            "year": "1994",
-                            "imag": "https://m.media-amazon.com/images/M/MV5BMDFkYTc0MGEtZmNhMC00ZDIzLWFmNTEtODM1ZmRlYWMwMWFmXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_UX128_CR0,3,128,176_AL_.jpg",
-                            "imDbRating": "9.2"
-                        }
-                    ],
-                    "errorMessage": ""
-                }"""
-            .stripIndent();
-
-    return Stream.of(
-        arguments(jsonMovieMissingImageProperty, BASE_MESSAGE_ERROR.formatted("image")),
-        arguments(jsonMovieWrongImageProperty, BASE_MESSAGE_ERROR.formatted("image")));
-  }
-
-  private static Stream<Arguments> jsonWithRatingErrorMapMessageError() {
-    var jsonMovieMissingRatingProperty =
-        """
-                {
-                    "items": [
-                        {
-                            "title": "The Shawshank Redemption",
-                            "year": "1994",
-                            "image": "https://m.media-amazon.com/images/M/MV5BMDFkYTc0MGEtZmNhMC00ZDIzLWFmNTEtODM1ZmRlYWMwMWFmXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_UX128_CR0,3,128,176_AL_.jpg",
-                        }
-                    ],
-                    "errorMessage": ""
-                }"""
-            .stripIndent();
-    var jsonMovieWrongRatingProperty =
-        """
-                {
-                    "items": [
-                        {
-                            "title": "The Shawshank Redemption",
-                            "year": "1994",
-                            "image": "https://m.media-amazon.com/images/M/MV5BMDFkYTc0MGEtZmNhMC00ZDIzLWFmNTEtODM1ZmRlYWMwMWFmXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_UX128_CR0,3,128,176_AL_.jpg",
-                            "imDbRatin": "9.2"
-                        }
-                    ],
-                    "errorMessage": ""
-                }"""
-            .stripIndent();
-
-    return Stream.of(
-        arguments(jsonMovieMissingRatingProperty, BASE_MESSAGE_ERROR.formatted("imDbRating")),
-        arguments(jsonMovieWrongRatingProperty, BASE_MESSAGE_ERROR.formatted("imDbRating")));
-  }
-
   private static Stream<Arguments> jsonMapMovies() {
     return Stream.of(
         arguments(
@@ -233,12 +132,7 @@ class ImdbMoviesJsonParserTest {
   }
 
   @ParameterizedTest
-  @MethodSource({
-    "jsonWithItemsCollectionsErrorMapMessageError",
-    "jsonWithTitlePropertyErrorMapMessageError",
-    "jsonWithImagePropertyErrorMapMessageError",
-    "jsonWithRatingErrorMapMessageError"
-  })
+  @MethodSource("jsonWithItemsCollectionsErrorMapMessageError")
   void Should_IllegalArgumentException_When_JsonMovieDoesNotFollowExpectedStructure(
       String jsonMovie, String messageErrorExpected) {
     final ImdbMoviesJsonParser imdbMoviesJsonParser = new ImdbMoviesJsonParser(jsonMovie);
@@ -250,7 +144,8 @@ class ImdbMoviesJsonParserTest {
 
   @ParameterizedTest
   @MethodSource("jsonMapMovies")
-  void Should_ParseMovies_When_JsonMovieIsValid(String jsonMovie, List<Movie> moviesExpected) {
+  void Should_ParseMovies_When_JsonMovieIsValid(String jsonMovie, List<Movie> moviesExpected)
+      throws JsonProcessingException {
     final ImdbMoviesJsonParser imdbMoviesJsonParser = new ImdbMoviesJsonParser(jsonMovie);
 
     final List<Movie> movies = imdbMoviesJsonParser.parse();
