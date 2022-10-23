@@ -38,7 +38,7 @@ class HtmlGeneratorTest {
 
     Exception exception =
         assertThrows(NullPointerException.class, () -> htmlGenerator.generate(null));
-    assertEquals("'movies' cannot be null.", exception.getMessage());
+    assertEquals("'contents' cannot be null.", exception.getMessage());
   }
 
   @Test
