@@ -13,12 +13,12 @@ public class Main {
 
     final String imdbTop250MoviesApiUri = "https://imdb-api.com/en/API/Top250Movies/";
     final String imdbApiKey = System.getenv("IMDB_API_KEY");
-    final ImdbApiClient imdbApiClient = new ImdbApiClient(imdbTop250MoviesApiUri, imdbApiKey);
+    final ApiClient imdbApiClient = new ImdbApiClient(imdbTop250MoviesApiUri, imdbApiKey);
 
     final String seriesMarvelUri = "https://gateway.marvel.com:443/v1/public/series";
     final String marvelPublicApiKey = System.getenv("MARVEL_PUBLIC_API_KEY");
     final String marvelPrivateApiKey = System.getenv("MARVEL_PRIVATE_API_KEY");
-    final MarvelApiClient marvelApiClient =
+    final ApiClient marvelApiClient =
         new MarvelApiClient(seriesMarvelUri, marvelPublicApiKey, marvelPrivateApiKey);
 
     final String seriesJson = marvelApiClient.getBody();

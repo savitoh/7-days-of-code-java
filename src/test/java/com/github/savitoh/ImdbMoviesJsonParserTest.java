@@ -135,7 +135,7 @@ class ImdbMoviesJsonParserTest {
   @MethodSource("jsonWithItemsCollectionsErrorMapMessageError")
   void Should_IllegalArgumentException_When_JsonMovieDoesNotFollowExpectedStructure(
       String jsonMovie, String messageErrorExpected) {
-    final ImdbMoviesJsonParser imdbMoviesJsonParser = new ImdbMoviesJsonParser(jsonMovie);
+    final JsonParser imdbMoviesJsonParser = new ImdbMoviesJsonParser(jsonMovie);
 
     Exception exception = assertThrows(IllegalArgumentException.class, imdbMoviesJsonParser::parse);
 
@@ -146,7 +146,7 @@ class ImdbMoviesJsonParserTest {
   @MethodSource("jsonMapMovies")
   void Should_ParseMovies_When_JsonMovieIsValid(String jsonMovie, List<Movie> moviesExpected)
       throws JsonProcessingException {
-    final ImdbMoviesJsonParser imdbMoviesJsonParser = new ImdbMoviesJsonParser(jsonMovie);
+    final JsonParser imdbMoviesJsonParser = new ImdbMoviesJsonParser(jsonMovie);
 
     final List<Content> movies = imdbMoviesJsonParser.parse();
 

@@ -1,5 +1,6 @@
 package com.github.savitoh.imdb;
 
+import com.github.savitoh.ApiClient;
 import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -8,7 +9,7 @@ import java.net.http.HttpResponse;
 import java.time.Duration;
 import java.util.Objects;
 
-public class ImdbApiClient {
+public class ImdbApiClient implements ApiClient {
 
   private final HttpRequest httpRequest;
 
@@ -27,6 +28,7 @@ public class ImdbApiClient {
     this.httpClient = HttpClient.newBuilder().connectTimeout(Duration.ofMinutes(1)).build();
   }
 
+  @Override
   public String getBody() throws IOException, InterruptedException {
     HttpResponse<String> response =
         this.httpClient.send(this.httpRequest, HttpResponse.BodyHandlers.ofString());
