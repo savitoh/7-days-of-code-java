@@ -148,7 +148,7 @@ class ImdbMoviesJsonParserTest {
       throws JsonProcessingException {
     final ImdbMoviesJsonParser imdbMoviesJsonParser = new ImdbMoviesJsonParser(jsonMovie);
 
-    final List<Movie> movies = imdbMoviesJsonParser.parse();
+    final List<Content> movies = imdbMoviesJsonParser.parse();
 
     assertEquals(moviesExpected, movies);
   }

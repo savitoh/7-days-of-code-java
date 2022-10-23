@@ -1,6 +1,5 @@
 package com.github.savitoh;
 
-import com.github.savitoh.imdb.Movie;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.List;
@@ -60,7 +59,7 @@ public class HtmlGenerator {
     this.writer = writer;
   }
 
-  private String generateMovieCards(List<Movie> movies) {
+  private String generateMovieCards(List<Content> movies) {
     return movies.stream()
         .map(
             movie ->
@@ -70,7 +69,7 @@ public class HtmlGenerator {
         .strip();
   }
 
-  public void generate(List<Movie> movies) throws IOException {
+  public void generate(List<Content> movies) throws IOException {
     Objects.requireNonNull(movies, "'movies' cannot be null.");
     final var movieCards = generateMovieCards(movies);
     final var body = BODY_TEMPLATE.formatted(movieCards).strip();
