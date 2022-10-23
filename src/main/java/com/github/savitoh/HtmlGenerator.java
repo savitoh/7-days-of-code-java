@@ -1,6 +1,5 @@
 package com.github.savitoh;
 
-import com.github.savitoh.imdb.Movie;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.List;
@@ -41,7 +40,7 @@ public class HtmlGenerator {
             """
           .stripIndent();
 
-  private static final String MOVIE_CARD_TEMPLATE =
+  private static final String CONTENT_CARD_TEMPLATE =
       """
                 <div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
                     <h4 class="card-header">%s</h4>
@@ -60,19 +59,23 @@ public class HtmlGenerator {
     this.writer = writer;
   }
 
-  private String generateMovieCards(List<Movie> movies) {
-    return movies.stream()
+  private String generateContentCards(List<Content> contents) {
+    return contents.stream()
         .map(
-            movie ->
-                MOVIE_CARD_TEMPLATE.formatted(
-                    movie.title(), movie.urlImage(), movie.title(), movie.rating(), movie.year()))
+            content ->
+                CONTENT_CARD_TEMPLATE.formatted(
+                    content.title(),
+                    content.urlImage(),
+                    content.title(),
+                    content.rating(),
+                    content.year()))
         .collect(Collectors.joining("\n"))
         .strip();
   }
 
-  public void generate(List<Movie> movies) throws IOException {
-    Objects.requireNonNull(movies, "'movies' cannot be null.");
-    final var movieCards = generateMovieCards(movies);
+  public void generate(List<Content> contents) throws IOException {
+    Objects.requireNonNull(contents, "'contents' cannot be null.");
+    final var movieCards = generateContentCards(contents);
     final var body = BODY_TEMPLATE.formatted(movieCards).strip();
     final var html = HTML_TEMPLATE.formatted(HEAD, body).strip();
     writer.write(html);

@@ -2,9 +2,7 @@ package com.github.savitoh;
 
 import com.github.savitoh.imdb.ImdbApiClient;
 import com.github.savitoh.imdb.ImdbMoviesJsonParser;
-import com.github.savitoh.imdb.Movie;
 import com.github.savitoh.marvel.MarvelApiClient;
-import com.github.savitoh.marvel.Series;
 import com.github.savitoh.marvel.SeriesJsonParser;
 import java.io.FileWriter;
 import java.util.List;
@@ -24,9 +22,9 @@ public class Main {
         new MarvelApiClient(seriesMarvelUri, marvelPublicApiKey, marvelPrivateApiKey);
 
     final String seriesJson = marvelApiClient.getBody();
-    final List<Series> series = new SeriesJsonParser(seriesJson).parse();
+    final List<Content> series = new SeriesJsonParser(seriesJson).parse();
     final String top250MoviesJson = imdbApiClient.getBody();
-    final List<Movie> movies = new ImdbMoviesJsonParser(top250MoviesJson).parse();
+    final List<Content> movies = new ImdbMoviesJsonParser(top250MoviesJson).parse();
 
     try (final var writer = new FileWriter("movies.html")) {
       HtmlGenerator htmlGenerator = new HtmlGenerator(writer);

@@ -1,9 +1,6 @@
 package com.github.savitoh;
 
-import static java.util.List.of;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 import com.github.savitoh.imdb.Movie;
 import java.io.FileWriter;
@@ -41,7 +38,7 @@ class HtmlGeneratorTest {
 
     Exception exception =
         assertThrows(NullPointerException.class, () -> htmlGenerator.generate(null));
-    assertEquals("'movies' cannot be null.", exception.getMessage());
+    assertEquals("'contents' cannot be null.", exception.getMessage());
   }
 
   @Test
@@ -49,8 +46,8 @@ class HtmlGeneratorTest {
       throws IOException {
     final var writer = new FileWriter(this.tempMoviesHtml.toFile());
     final var htmlGenerator = new HtmlGenerator(writer);
-    final var movies =
-        of(
+    final List<Content> movies =
+        List.of(
             new Movie(
                 "Harry Potter",
                 "https://play-lh.googleusercontent.com/SF5BMT_IsoF7GBl4USjTr4CrNvXkFClA26qvzyKX6chRdGaXr6JDvnTVqO3wv2EF161VC2jD80YTedD-6HI=w200-h300-rw",

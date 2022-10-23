@@ -5,5 +5,5 @@ import java.util.List;
 
 public interface JsonParser {
 
-  List<? extends Content> parse() throws JsonProcessingException;
+  List<Content> parse() throws JsonProcessingException;
 }
