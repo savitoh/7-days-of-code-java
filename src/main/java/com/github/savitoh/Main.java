@@ -38,45 +38,25 @@ public class Main {
                   var seriesResult = seriesFuture.join();
                   var moviesResult = moviesFuture.join();
                   final List<Content> series =
-                      seriesResult
-                          .getResponse()
-                          .map(
-                              seriesJson -> {
-                                try {
-                                  return new SeriesJsonParser(seriesJson).parse();
-                                } catch (JsonProcessingException e) {
-                                  throw new RuntimeException(e);
-                                }
-                              })
-                          .orElseGet(
-                              () -> {
-                                LOGGER.log(
-                                    Level.SEVERE,
-                                    "An error occurred during Marvel API access.",
-                                    seriesResult.getThrowable().get());
-                                return List.of();
-                              });
-
+                      seriesResult.parse(
+                          json -> {
+                            try {
+                              return new SeriesJsonParser(json).parse();
+                            } catch (JsonProcessingException e) {
+                              LOGGER.log(Level.SEVERE, "Parse JSON with error: \n{0}", json);
+                              throw new RuntimeException(e);
+                            }
+                          });
                   final List<Content> movies =
-                      moviesResult
-                          .getResponse()
-                          .map(
-                              moviesJson -> {
-                                try {
-                                  return new ImdbMoviesJsonParser(moviesJson).parse();
-                                } catch (JsonProcessingException e) {
-                                  throw new RuntimeException(e);
-                                }
-                              })
-                          .orElseGet(
-                              () -> {
-                                LOGGER.log(
-                                    Level.SEVERE,
-                                    "An error occurred during IMDB API access.",
-                                    moviesResult.getThrowable().get());
-                                return List.of();
-                              });
-
+                      moviesResult.parse(
+                          json -> {
+                            try {
+                              return new ImdbMoviesJsonParser(json).parse();
+                            } catch (JsonProcessingException e) {
+                              LOGGER.log(Level.SEVERE, "Parse JSON with error: \n{0}", json);
+                              throw new RuntimeException(e);
+                            }
+                          });
                   return Stream.concat(series.stream(), movies.stream()).toList();
                 })
             .join();
