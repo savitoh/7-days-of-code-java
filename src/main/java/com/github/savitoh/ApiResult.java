@@ -20,6 +20,7 @@ public class ApiResult {
   }
 
   public List<Content> parse(Function<String, List<Content>> parser) {
+    Objects.requireNonNull(parser, "'parser' cannot be null.");
     if (Objects.isNull(response)) {
       LOGGER.log(Level.SEVERE, throwable.getMessage(), throwable);
     }

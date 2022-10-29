@@ -18,11 +18,11 @@ public class Main {
 
   public static void main(String[] args) throws Exception {
 
-    final String imdbTop250MoviesApiUri = "https://imdb-api.com/en/API/Top250Movies/";
+    final var imdbTop250MoviesApiUri = "https://imdb-api.com/en/API/Top250Movies/";
     final String imdbApiKey = System.getenv("IMDB_API_KEY");
     final ApiClient imdbApiClient = new ImdbApiClient(imdbTop250MoviesApiUri, imdbApiKey);
 
-    final String seriesMarvelUri = "https://gateway.marvel.com:443/v1/public/series";
+    final var seriesMarvelUri = "https://gateway.marvel.com:443/v1/public/series";
     final String marvelPublicApiKey = System.getenv("MARVEL_PUBLIC_API_KEY");
     final String marvelPrivateApiKey = System.getenv("MARVEL_PRIVATE_API_KEY");
     final ApiClient marvelApiClient =
@@ -35,8 +35,8 @@ public class Main {
         CompletableFuture.allOf(seriesFuture, moviesFuture)
             .thenApply(
                 v -> {
-                  var seriesResult = seriesFuture.join();
-                  var moviesResult = moviesFuture.join();
+                  ApiResult seriesResult = seriesFuture.join();
+                  ApiResult moviesResult = moviesFuture.join();
                   final List<Content> series =
                       seriesResult.parse(
                           json -> {
@@ -62,7 +62,7 @@ public class Main {
             .join();
 
     try (final var writer = new FileWriter("movies.html")) {
-      HtmlGenerator htmlGenerator = new HtmlGenerator(writer);
+      var htmlGenerator = new HtmlGenerator(writer);
       htmlGenerator.generate(contents);
     }
   }
