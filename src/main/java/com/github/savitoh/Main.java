@@ -61,6 +61,9 @@ public class Main {
                 })
             .join();
 
+    contents.stream()
+        .parallel()
+        .forEach(content -> LOGGER.log(Level.INFO, " - Content: {0}", content));
     try (final var writer = new FileWriter("movies.html")) {
       var htmlGenerator = new HtmlGenerator(writer);
       htmlGenerator.generate(contents);
