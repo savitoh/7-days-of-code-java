@@ -9,4 +9,6 @@ public interface Content {
   String rating();
 
   String year();
+
+  ContentType contentType();
 }
