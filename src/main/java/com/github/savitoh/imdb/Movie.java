@@ -9,9 +9,14 @@ public record Movie(
     @JsonProperty("image") String urlImage,
     @JsonProperty("imDbRating") String rating,
     String year)
-    implements Content {
+    implements Content, Comparable<Content> {
   @Override
   public ContentType contentType() {
     return ContentType.MOVIE;
+  }
+
+  @Override
+  public int compareTo(Content o) {
+    return 0;
   }
 }

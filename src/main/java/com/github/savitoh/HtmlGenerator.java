@@ -78,9 +78,10 @@ public class HtmlGenerator {
 
   public void generate(List<Content> contents) throws IOException {
     Objects.requireNonNull(contents, "'contents' cannot be null.");
-    final var movieCards = generateContentCards(contents);
-    final var body = BODY_TEMPLATE.formatted(movieCards).strip();
-    final var html = HTML_TEMPLATE.formatted(HEAD, body).strip();
+    final var sortedContents = contents.stream().sorted(ContentComparator.comparator).toList();
+    final String movieCards = generateContentCards(sortedContents);
+    final String body = BODY_TEMPLATE.formatted(movieCards).strip();
+    final String html = HTML_TEMPLATE.formatted(HEAD, body).strip();
     writer.write(html);
   }
 }
