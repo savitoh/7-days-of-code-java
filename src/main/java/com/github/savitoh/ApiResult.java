@@ -23,6 +23,7 @@ public class ApiResult {
     Objects.requireNonNull(parser, "'parser' cannot be null.");
     if (Objects.isNull(response)) {
       LOGGER.log(Level.SEVERE, throwable.getMessage(), throwable);
+      throw new RuntimeException("Can't parse JSON. 'response' is null.", throwable);
     }
     return parser.apply(response);
   }
