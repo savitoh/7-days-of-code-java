@@ -42,8 +42,7 @@ class HtmlGeneratorTest {
   }
 
   @Test
-  void Should_GenerateHtmlWithMultiplesMovies_When_MoviesArgumentsHasMoreOneElement()
-      throws IOException {
+  void Should_GenerateHtmlWithContentCards_When_ContentsArgumentsIsNotEmpty() throws IOException {
     final var writer = new FileWriter(this.tempMoviesHtml.toFile());
     final var htmlGenerator = new HtmlGenerator(writer);
     final List<Content> movies =
@@ -63,9 +62,10 @@ class HtmlGeneratorTest {
                 <!doctype html>
                     <html lang="en-us">
                                 <head>
+                            <title>7 days of code JAVA</title>
                             <meta charset="utf-8">
                             <meta name="HandheldFriendly" content="True">
-                            <meta name="description" content="7 days of code - Java (IMDB Challenge)">
+                            <meta name="description" content="7 days of code Java">
                             <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
                             <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
                         </head>
@@ -75,6 +75,7 @@ class HtmlGeneratorTest {
                             <div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
                         <h4 class="card-header">Harry Potter</h4>
                         <div class="card-body">
+                            <h6 class="card-subtitle mb-2 text-muted">MOVIE</h6>
                             <img class="card-img" src="https://play-lh.googleusercontent.com/SF5BMT_IsoF7GBl4USjTr4CrNvXkFClA26qvzyKX6chRdGaXr6JDvnTVqO3wv2EF161VC2jD80YTedD-6HI=w200-h300-rw" alt="Harry Potter">
                             <p class="card-text mt-2">Nota: 9.0 - Ano: 2001</p>
                         </div>
@@ -89,7 +90,7 @@ class HtmlGeneratorTest {
   }
 
   @Test
-  void Should_GenerateHtmlWithOutMovies_When_MoviesArgumentsHasEmpty() throws IOException {
+  void Should_GenerateHtmlWithOutContentsCards_When_ContentsArgumentIsEmpty() throws IOException {
     final var writer = new FileWriter(this.tempMoviesHtml.toFile());
     final var htmlGenerator = new HtmlGenerator(writer);
 
@@ -102,9 +103,10 @@ class HtmlGeneratorTest {
                 <!doctype html>
                     <html lang="en-us">
                                 <head>
+                            <title>7 days of code JAVA</title>
                             <meta charset="utf-8">
                             <meta name="HandheldFriendly" content="True">
-                            <meta name="description" content="7 days of code - Java (IMDB Challenge)">
+                            <meta name="description" content="7 days of code Java">
                             <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
                             <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
                         </head>
