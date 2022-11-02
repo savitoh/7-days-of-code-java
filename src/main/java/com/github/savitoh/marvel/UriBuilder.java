@@ -19,7 +19,7 @@ final class UriBuilder {
   }
 
   String builder() throws NoSuchAlgorithmException {
-    final String uriTemplate = baseUri + "?ts=%s&apikey=%s&hash=%s";
+    final String uriTemplate = baseUri + "?ts=%s&apikey=%s&hash=%s&limit=100";
     return uriTemplate.formatted(timestamp, publicApiKey, this.generateMD5Hash());
   }
 
