@@ -38,7 +38,7 @@ public class ImdbApiClient implements ApiClient {
   }
 
   @Override
-  public CompletableFuture<ApiResult> getBodyAsync() throws IOException, InterruptedException {
+  public CompletableFuture<ApiResult> getBodyAsync() {
     return this.httpClient
         .sendAsync(this.httpRequest, HttpResponse.BodyHandlers.ofString())
         .handleAsync(

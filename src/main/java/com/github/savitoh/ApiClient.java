@@ -7,5 +7,5 @@ public interface ApiClient {
 
   String getBody() throws IOException, InterruptedException;
 
-  CompletableFuture<ApiResult> getBodyAsync() throws IOException, InterruptedException;
+  CompletableFuture<ApiResult> getBodyAsync();
 }
