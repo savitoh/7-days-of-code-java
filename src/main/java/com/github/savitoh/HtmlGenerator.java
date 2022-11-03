@@ -35,7 +35,11 @@ public class HtmlGenerator {
       """
                <body>
                     <main>
+                    <div class="container-fluid">
+                      <div class="row">
                         %s
+                      </div>
+                    </div>
                     </main>
                </body>
             """
@@ -43,13 +47,19 @@ public class HtmlGenerator {
 
   private static final String CONTENT_CARD_TEMPLATE =
       """
-                <div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
-                    <h4 class="card-header">%s</h4>
-                    <div class="card-body">
-                        <h6 class="card-subtitle mb-2 text-muted">%s</h6>
-                        <img class="card-img" src="%s" alt="%s">
-                        <p class="card-text mt-2">Nota: %s - Ano: %s</p>
-                    </div>
+                <div class="col-6 col-md-4 col-lg-3 mb-4">
+                  <div class="card text-white bg-dark mb-3"
+                       style="max-width: 18rem;">
+                      <h4 class="card-header"
+                          style="text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">
+                        %s
+                      </h4>
+                      <div class="card-body">
+                          <h6 class="card-subtitle mb-2 text-muted">%s</h6>
+                          <img class="card-img" src="%s" alt="%s">
+                          <p class="card-text mt-2">Nota: %s - Ano: %s</p>
+                      </div>
+                  </div>
                 </div>
             """
           .stripIndent();
