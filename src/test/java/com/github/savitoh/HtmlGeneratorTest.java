@@ -69,18 +69,35 @@ class HtmlGeneratorTest {
                             <meta name="description" content="7 days of code Java">
                             <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
                             <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+                            <script>
+                              $(function () {
+                                $('[data-toggle="tooltip"]').tooltip()
+                              })
+                            </script>
                         </head>
 
                         <body>
                         <main>
-                            <div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
-                        <h4 class="card-header">Harry Potter</h4>
-                        <div class="card-body">
-                            <h6 class="card-subtitle mb-2 text-muted">MOVIE</h6>
-                            <img class="card-img" src="https://play-lh.googleusercontent.com/SF5BMT_IsoF7GBl4USjTr4CrNvXkFClA26qvzyKX6chRdGaXr6JDvnTVqO3wv2EF161VC2jD80YTedD-6HI=w200-h300-rw" alt="Harry Potter">
-                            <p class="card-text mt-2">Nota: 9.0 - Ano: 2001</p>
-                        </div>
+                        <div class="container-fluid">
+                          <div class="row">
+                                <div class="col-6 col-md-4 col-lg-3 mb-4">
+                      <div class="card text-white bg-dark mb-3"
+                           style="max-width: 18rem;">
+                          <h4 class="card-header"
+                              style="text-overflow: ellipsis; white-space: nowrap; overflow: hidden;"
+                              data-toggle="tooltip" data-placement="right" title="Harry Potter">
+                            Harry Potter
+                          </h4>
+                          <div class="card-body">
+                              <h6 class="card-subtitle mb-2 text-muted">MOVIE</h6>
+                              <img class="card-img" src="https://play-lh.googleusercontent.com/SF5BMT_IsoF7GBl4USjTr4CrNvXkFClA26qvzyKX6chRdGaXr6JDvnTVqO3wv2EF161VC2jD80YTedD-6HI=w200-h300-rw" alt="Harry Potter">
+                              <p class="card-text mt-2">Nota: 9.0 - Ano: 2001</p>
+                          </div>
+                      </div>
                     </div>
+
+                          </div>
+                        </div>
                         </main>
                    </body>
                     </html>
@@ -110,11 +127,20 @@ class HtmlGeneratorTest {
                             <meta name="description" content="7 days of code Java">
                             <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
                             <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+                            <script>
+                              $(function () {
+                                $('[data-toggle="tooltip"]').tooltip()
+                              })
+                            </script>
                         </head>
 
                         <body>
                         <main>
+                        <div class="container-fluid">
+                          <div class="row">
                            \s
+                          </div>
+                        </div>
                         </main>
                    </body>
                     </html>""";
