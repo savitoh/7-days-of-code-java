@@ -3,6 +3,7 @@ package com.github.savitoh;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.github.savitoh.content.Content;
 import com.github.savitoh.imdb.ImdbMoviesJsonParser;
 import com.github.savitoh.marvel.SeriesJsonParser;
 import java.util.List;

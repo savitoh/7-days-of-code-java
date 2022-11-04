@@ -1,6 +1,8 @@
 package com.github.savitoh;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.github.savitoh.content.Content;
+import com.github.savitoh.content.ContentComparator;
 import com.github.savitoh.imdb.ImdbApiClient;
 import com.github.savitoh.imdb.ImdbMoviesJsonParser;
 import com.github.savitoh.marvel.MarvelApiClient;

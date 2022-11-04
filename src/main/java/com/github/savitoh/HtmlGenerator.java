@@ -1,5 +1,6 @@
 package com.github.savitoh;
 
+import com.github.savitoh.content.Content;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.List;

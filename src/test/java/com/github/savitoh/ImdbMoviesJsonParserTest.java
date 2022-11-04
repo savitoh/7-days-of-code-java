@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.github.savitoh.content.Content;
 import com.github.savitoh.imdb.ImdbMoviesJsonParser;
 import com.github.savitoh.imdb.Movie;
 import java.util.List;

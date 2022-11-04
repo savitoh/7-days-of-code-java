@@ -2,8 +2,8 @@ package com.github.savitoh.marvel;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import com.github.savitoh.Content;
 import com.github.savitoh.JsonParser;
+import com.github.savitoh.content.Content;
 import java.io.IOException;
 import java.util.List;
 import org.junit.jupiter.api.Test;

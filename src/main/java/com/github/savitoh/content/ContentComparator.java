@@ -1,4 +1,4 @@
-package com.github.savitoh;
+package com.github.savitoh.content;
 
 import java.util.Comparator;
 

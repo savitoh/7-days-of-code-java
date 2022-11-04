@@ -2,6 +2,8 @@ package com.github.savitoh;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import com.github.savitoh.content.Content;
+import com.github.savitoh.content.ContentComparator;
 import com.github.savitoh.imdb.Movie;
 import com.github.savitoh.marvel.Series;
 import java.util.List;

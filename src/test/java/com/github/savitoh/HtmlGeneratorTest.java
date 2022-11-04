@@ -2,6 +2,7 @@ package com.github.savitoh;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import com.github.savitoh.content.Content;
 import com.github.savitoh.imdb.Movie;
 import java.io.FileWriter;
 import java.io.IOException;
