@@ -1,4 +1,4 @@
-package com.github.savitoh;
+package com.github.savitoh.content;
 
 public interface Content {
 

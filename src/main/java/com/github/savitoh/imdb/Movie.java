@@ -1,8 +1,8 @@
 package com.github.savitoh.imdb;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.github.savitoh.Content;
-import com.github.savitoh.ContentType;
+import com.github.savitoh.content.Content;
+import com.github.savitoh.content.ContentType;
 
 public record Movie(
     String title,
