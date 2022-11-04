@@ -16,8 +16,7 @@ public class HtmlGenerator {
                     %s
                     %s
                 </html>
-            """
-          .stripIndent();
+            """;
 
   private static final String HEAD =
       """
@@ -28,9 +27,13 @@ public class HtmlGenerator {
                         <meta name="description" content="7 days of code Java">
                         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
                         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+                        <script>
+                          $(function () {
+                            $('[data-toggle="tooltip"]').tooltip()
+                          })
+                        </script>
                     </head>
-            """
-          .stripIndent();
+            """;
 
   private static final String BODY_TEMPLATE =
       """
@@ -43,8 +46,7 @@ public class HtmlGenerator {
                     </div>
                     </main>
                </body>
-            """
-          .stripIndent();
+            """;
 
   private static final String CONTENT_CARD_TEMPLATE =
       """
@@ -52,7 +54,8 @@ public class HtmlGenerator {
                   <div class="card text-white bg-dark mb-3"
                        style="max-width: 18rem;">
                       <h4 class="card-header"
-                          style="text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">
+                          style="text-overflow: ellipsis; white-space: nowrap; overflow: hidden;"
+                          data-toggle="tooltip" data-placement="right" title="%s">
                         %s
                       </h4>
                       <div class="card-body">
@@ -62,8 +65,7 @@ public class HtmlGenerator {
                       </div>
                   </div>
                 </div>
-            """
-          .stripIndent();
+            """;
 
   private final Writer writer;
 
@@ -78,13 +80,13 @@ public class HtmlGenerator {
             content ->
                 CONTENT_CARD_TEMPLATE.formatted(
                     content.title(),
+                    content.title(),
                     content.contentType().name(),
                     content.urlImage(),
                     content.title(),
                     content.rating(),
                     content.year()))
-        .collect(Collectors.joining("\n"))
-        .strip();
+        .collect(Collectors.joining("\n"));
   }
 
   public void generate(List<Content> contents) throws IOException {
