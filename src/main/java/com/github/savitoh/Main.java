@@ -5,10 +5,13 @@ import com.github.savitoh.content.Content;
 import com.github.savitoh.content.ContentComparator;
 import com.github.savitoh.imdb.ImdbApiClient;
 import com.github.savitoh.imdb.ImdbMoviesJsonParser;
+import com.github.savitoh.internationalization.ResourceBundleTranslator;
 import com.github.savitoh.marvel.MarvelApiClient;
 import com.github.savitoh.marvel.SeriesJsonParser;
 import java.io.FileWriter;
 import java.util.List;
+import java.util.Locale;
+import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -67,8 +70,11 @@ public class Main {
 
     sortedContents.forEach(content -> LOGGER.log(Level.INFO, " - Content: {0}", content));
     try (final var writer = new FileWriter("movies.html")) {
-      var htmlGenerator = new HtmlGenerator(writer);
-      htmlGenerator.generate(sortedContents);
+      String localeTag = System.getProperty("locale");
+      Locale locale = Objects.requireNonNullElse(Locale.forLanguageTag(localeTag), Locale.US);
+      var translator = new ResourceBundleTranslator();
+      var htmlGenerator = new HtmlGenerator(writer, translator);
+      htmlGenerator.generate(sortedContents, locale);
     }
   }
 }
