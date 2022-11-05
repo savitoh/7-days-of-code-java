@@ -11,7 +11,7 @@ You need following the below passes for run the project.
 * [JDK 17](https://jdk.java.net/17/)
 * [Maven 3.6+](https://maven.apache.org/download.cgi)
 
-## Installation
+## Configuration
 
 1. Create a developer account on link: https://imdb-api.com/api
 2. Create a developer account on link: https://developer.marvel.com/account
@@ -25,3 +25,27 @@ You need following the below passes for run the project.
         export MARVEL_PUBLIC_API_KEY=replace with Public API Key generated
         export MARVEL_PRIVATE_API_KEY=replace with Private API Key generated
      ```
+   
+## Build and Run
+
+1. Build app with package maven command:
+     ``` shell
+        mvn package
+     ```
+   **ps.**: You also can build to jdk-8 target. Only use jdk-8 maven profile:
+     ``` shell
+        mvn package -P jdk-8
+     ```
+2. And then run 
+   ``` shell
+        java -jar 7-days-of-code-java-jdk17-1.0-SNAPSHOT.jar
+     ```
+   Or if you build to jdk-8 target:
+   ``` shell
+        java -jar 7-days-of-code-java-jdk8-1.0-SNAPSHOT.jar
+     ```
+   **ps.**: If you want to translate .html output, pass the **locale** as argument following tag format:
+
+   ``` shell
+        java -Dlocale=pt-BR -jar 7-days-of-code-java-jdk17-1.0-SNAPSHOT.jar
+   ```
