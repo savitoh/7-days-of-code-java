@@ -1,7 +1,6 @@
 package com.github.savitoh.internationalization;
 
 import java.util.Locale;
-import java.util.MissingResourceException;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -18,22 +17,14 @@ public non-sealed class ResourceBundleTranslator implements Translator {
   public Optional<String> translate(Locale locale, String tag) {
     Objects.requireNonNull(locale, "'locale' cannot be null.");
     Objects.requireNonNull(tag, "'tag' cannot be null.");
-    try {
-      final var resourceBundle = ResourceBundle.getBundle(I18N_PATH, locale);
-      if (resourceBundle.containsKey(tag)) {
-        resourceBundle.getString(tag);
-        return Optional.of(resourceBundle.getString(tag));
-      }
-      final String message =
-          "Tag: '%s' not found on Resource Bundle to Locale: '%s'"
-              .formatted(tag, locale.toString());
-      LOGGER.log(Level.INFO, message);
-      return Optional.empty();
-    } catch (MissingResourceException exception) {
-      final String message =
-          "Resource bundle not found to Locale: '%s'".formatted(locale.toString());
-      LOGGER.log(Level.SEVERE, message, exception);
-      return Optional.empty();
+    final var resourceBundle = ResourceBundle.getBundle(I18N_PATH, locale);
+    if (resourceBundle.containsKey(tag)) {
+      resourceBundle.getString(tag);
+      return Optional.of(resourceBundle.getString(tag));
     }
+    final String message =
+        "Tag: '%s' not found on Resource Bundle to Locale: '%s'".formatted(tag, locale.toString());
+    LOGGER.log(Level.INFO, message);
+    return Optional.empty();
   }
 }

@@ -112,7 +112,7 @@ public class HtmlGenerator {
     final String movieCards = generateContentCards(contents, locale);
     final String body = BODY_TEMPLATE.formatted(movieCards);
     final String head = generateHead(locale);
-    final String html = HTML_TEMPLATE.formatted(head, body);
+    final String html = HTML_TEMPLATE.formatted(head, body).stripIndent();
     writer.write(html);
   }
 }
