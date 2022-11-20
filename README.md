@@ -32,20 +32,12 @@ You need following the below passes for run the project.
      ``` shell
         mvn package
      ```
-   **ps.**: You also can build to jdk-8 target. Only use jdk-8 maven profile:
-     ``` shell
-        mvn package -P jdk-8
-     ```
 2. And then run 
    ``` shell
-        java -jar 7-days-of-code-java-jdk17-1.0-SNAPSHOT.jar
-     ```
-   Or if you build to jdk-8 target:
-   ``` shell
-        java -jar 7-days-of-code-java-jdk8-1.0-SNAPSHOT.jar
+        java -jar 7-days-of-code-java-1.0-SNAPSHOT-jar-with-dependencies.jar
      ```
    **ps.**: If you want to translate .html output, pass the **locale** as argument following tag format:
 
    ``` shell
-        java -Dlocale=pt-BR -jar 7-days-of-code-java-jdk17-1.0-SNAPSHOT.jar
+        java -Dlocale=pt-BR 7-days-of-code-java-1.0-SNAPSHOT-jar-with-dependencies.jar
    ```
