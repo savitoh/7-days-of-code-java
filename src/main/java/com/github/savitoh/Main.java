@@ -70,8 +70,8 @@ public class Main {
 
     sortedContents.forEach(content -> LOGGER.log(Level.INFO, " - Content: {0}", content));
     try (final var writer = new FileWriter("movies.html")) {
-      String localeTag = System.getProperty("locale");
-      Locale locale = Objects.requireNonNullElse(Locale.forLanguageTag(localeTag), Locale.US);
+      String localeTag = Objects.requireNonNullElse(System.getProperty("locale"), "en-US");
+      Locale locale = Locale.forLanguageTag(localeTag);
       var translator = new ResourceBundleTranslator();
       var htmlGenerator = new HtmlGenerator(writer, translator);
       htmlGenerator.generate(sortedContents, locale);
